@@ -2,6 +2,7 @@ import sys
 import time
 import argparse
 import re
+import json
 from datetime import datetime, timedelta
 import boto3
 from botocore.exceptions import ClientError
@@ -87,9 +88,10 @@ for from_time in generate_from_time(args.start_datetime, args.end_datetime):
             if task_status == 'COMPLETED':
                 print_task_status()
                 break
-            elif task_status == 'PENDING' or 'RUNNING':
+            elif task_status == 'PENDING' or task_status == 'RUNNING':
                 print_task_status()
                 time.sleep(10)
             else:
                 print_task_status()
+                print(json.dumps(describe_export_tasks_resp["exportTasks"][0], indent=4))
                 sys.exit(1)
