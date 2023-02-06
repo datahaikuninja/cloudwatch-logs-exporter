@@ -52,7 +52,7 @@ parser.add_argument('--destination_bucket', required=True, type=str,
                     help='S3 bucket name. Export logs to the S3 bucket specified in this argument.')
 parser.add_argument('--destination_prefix', required=True, type=normalize_prefix,
                     help='S3 object prefix. Exported logs will have the prefix given to this argument.')
-parser.add_argument('--profile', type=str,
+parser.add_argument('--profile', required=True, type=str,
                     help='aws profile name. This argument is optional.')
 args = parser.parse_args()
 
